@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reborn黑皮书 - 今日作业</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans SC', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #6C757D;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .date {
+            color: #495057;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .content-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .password-section {
+            background: #e8f4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: block;
+        }
+        .password-input {
+            width: 200px;
+            padding: 12px;
+            border: 2px solid #84AFFF;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .password-button {
+            background-color: #84AFFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .password-button:hover {
+            background-color: #6A9CFF;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        .footer {
+            text-align: center;
+            color: #6C757D;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+        .subject-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .subject-item:last-child {
+            border-bottom: none;
+        }
+        .subject-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+        .subject-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #495057;
+            padding-left: 10px;
+        }
+        .subject-content a {
+            color: #0066cc;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .subject-content a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .logo { font-size: 2rem; }
+            .content-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Reborn黑皮书</div>
+            <div class="subtitle">今日作业</div>
+            <div class="date">2026年02月01日 星期日</div>
+        </div>
+        
+        
+        <div class="password-section" id="passwordSection">
+            <div style="font-weight: 600; margin-bottom: 10px;">请输入老师提供的口令</div>
+            <input type="password" class="password-input" id="passwordInput" placeholder="输入口令">
+            <br>
+            <button class="password-button" id="passwordSubmit">查看作业</button>
+            <div class="error-message" id="errorMessage">口令错误，请重新输入</div>
+        </div>
+        
+        
+        <div class="content-box" id="contentBox" style="display: none;">
+            <div class="title">📚 今日作业内容</div>
+            <div id="homeworkDisplay">
+                <!-- 作业内容将动态显示 -->
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>Reborn黑皮书 · 语言学习平台</div>
+            <div style="margin-top: 5px;">天天进步，每日新生</div>
+        </div>
+    </div>
+    
+    <script>
+        const homeworkData = {"vocab":"https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522packing%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522online%2520shopping%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522video%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522television%2520program%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522post%2520office%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522settle%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522scientist%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522agriculture%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522material%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522historical%2520map%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522king%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522preservation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522data%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522electrical%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522complex%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522steel%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522electricity%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522package%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522headphones%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522radio%2520signal%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522items%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522media%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522digital%2520store%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522rubber%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522measurement%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522twice%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522phone%2520statistics%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522space%2520station%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522bottom%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522small%2520scale%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D","reading":"https://breakingnewsenglish.com/","listening":"https://www.bilibili.com/video/BV1EpmTBqEMg?spm_id_from=333.788.videopod.sections&vd_source=197e51b747a21de6b2cb891f05d5bcfe","speaking":"https://liuyanglouise.github.io/speaking-gendu-003/#student-practice?data=JTdCJTIyc2VudGVuY2VzJTIyJTNBJTVCJTIyRGVzY3JpYmUlMjBhJTIwbG9uZyUyMGpvdXJuZXklMjBvciUyMHNob3J0JTIwdHJpcHMlMjB5b3UlMjB3b3VsZCUyMGxpa2UlMjB0byUyMG1ha2UlMjBhZ2Fpbi4lMjIlMkMlMjJZb3UlMjBzaG91bGQlMjBzYXkuJTIyJTJDJTIyV2hlcmUlMjB5b3UlMjB3ZW50LiUyMiUyQyUyMldobyUyMHlvdSUyMHdlbnQlMjB3aXRoLiUyMiUyQyUyMldoYXQlMjB5b3UlMjBkaWQlMjBkdXJpbmclMjB0aGUlMjB0cmlwLiUyMiUyQyUyMkFuZCUyMGV4cGxhaW4lMjB3aHklMjB5b3UlMjB3b3VsZCUyMGxpa2UlMjB0byUyMG1ha2UlMjB0aGUlMjB0cmlwJTIwYWdhaW4uJTIyJTJDJTIyVGhlJTIwcGxhY2UlMjBJJ2QlMjBsaWtlJTIwdG8lMjB0YWxrJTIwYWJvdXQlMjBpcyUyMGElMjBmb3Jlc3QlMjBjYWxsZWQlMjBKaXV4aSUyMHRoYXQlMjBJJTIwd2VudCUyMHRvJTIwdmlzaXQlMjB3aXRoJTIwbXklMjBwYXJlbnRzLiUyMiUyQyUyMldoaWNoJTIwd2FzJTIwaW4lMjB0aGUlMjBzdWJ1cmIlMjBvZiUyMGFuJTIwb2xkJTIwY2l0eSUyMGluJTIwQ2hpbmEuJTIyJTJDJTIyQW5kJTIwSSUyMHN1cHBvc2UlMjBpdCUyMG11c3QlMjBoYXZlJTIwYmVlbiUyMGFib3V0JTIwZm91ciUyMHllYXJzJTIwd2hlbiUyMHdlJTIwd2VudCUyMHRoZXJlLiUyMiUyQyUyMkFzJTIwZm9yJTIwd2hhdCUyMHRoZSUyMGZvcmVzdCUyMGxvb2tlZCUyMGxpa2UlMkMlMjB3ZWxsJTIwaXQlMjBzdHJva2UlMjBtZSUyMGFzJTIwYSUyMHZlcnklMjBvbGQlMjBwbGFjZS4lMjIlMkMlMjJJJTIwbWVhbiUyQyUyMGl0JTIwaGFzJTIwYmVlbiUyMHRoZXJlJTIwZm9yJTIwdGhvdXNhbmRzJTIwb2YlMjB5ZWFycyUyMHNvJTIwYWxsJTIwdGhlJTIwcGxhbnRzJTIwaGF2ZSUyMHF1aXRlJTIwYSUyMGxvbmclMjBoaXN0b3J5LiUyMiUyQyUyMllvdSUyMGNhbiUyMHRlbGwlMjBob3clMjBvbGQlMjB0aGlzJTIwZm9yZXN0JTIwaXMlMjBqdXN0JTIwYnklMjBsb29raW5nJTIwYXQlMjBhbGwlMjB0aG9zZSUyMHRvd2VyaW5nJTIwdHJlZXMuJTIyJTJDJTIyU29tZSUyMG9mJTIwdGhlbSUyMGFyZSUyMHNvJTIwdGFsbCUyMHRoYXQlMjB5b3UlMjBjYW4ndCUyMGV2ZW4lMjBzZWUlMjB0aGVpciUyMHRvcC4lMjIlMkMlMjJBcGFydCUyMGZyb20lMjB0aGF0JTJDJTIwYW5vdGhlciUyMGltcHJlc3Npb24lMjBJJTIwZ290JTIwd2FzJTIwdGhhdCUyMHRoaXMlMjBwbGFjZSUyMGlzJTIwZXh0cmVtZWx5JTIwbGl2ZWx5LiUyMiUyQyUyMlRoZXJlJTIwd2VyZSUyMG51bWVyb3VzJTIwY3JlZWtzJTIwcnVubmluZyUyMHRocm91Z2glMjB0aGUlMjBmb3Jlc3QuJTIyJTJDJTIyQW5kJTIwbG90cyUyMG9mJTIwYW5pbWFscyUyMGxpa2UlMjBjdWNrb28lMjBiaXJkcyUyQyUyMHNxdWlycmVscyUyMGFuZCUyMGV2ZW4lMjBkZWVyLiUyMiUyQyUyMkFuZCUyMHJlZ2FyZGluZyUyMHRvJTIwaG93JTIwd2UlMjBzcGVudCUyMHRpbWUlMjB0aGVyZSUyQyUyMHdlJTIwYmFzaWNhbGx5JTIwanVzdCUyMHdhbGtlZCUyMGFyb3VuZCUyMHRoZSUyMGZvcmVzdC4lMjIlMkMlMjJCdXQlMjBJJTIwZ3Vlc3MlMjB0aGUlMjBiZXN0JTIwd2F5JTIwdG8lMjBlbmpveSUyMGElMjBwZWFjZSUyMG9mJTIwbWluZCUyMHRoZXJlJTIwaXMlMjB0byUyMGxpZSUyMGluJTIwYSUyMGhhbW1vY2slMjBmb3IlMjBzZXZlcmFsJTIwaG91cnMuJTIyJTJDJTIyQXMlMjB3ZSUyMHNhdyUyMGElMjBsb3QlMjBvZiUyMHBlb3BsZSUyMGRpZC4lMjIlMkMlMjJGaW5hbGx5JTJDJTIwd2l0aCUyMHJlZ2FyZCUyMHRvJTIwd2h5JTIwSSUyMGZpbmQlMjBpdCUyMGElMjBnb29kJTIwcGxhY2UlMjBmb3IlMjByZWxheGF0aW9uLiUyMiUyQyUyMldlbGwlMjB0aGUlMjBtYWluJTIwcmVhc29uJTIwYmVpbmclMjB0aGF0JTIwdGhlJTIwYWlyJTIwaW4lMjB0aGlzJTIwZm9yZXN0JTIwaXMlMjBleHRyZW1lbHklMjBwdXJlJTIwYW5kJTIwY2xlYW4uJTIyJTJDJTIySSUyMGRvbid0JTIwa25vdyUyMGlmJTIweW91J3ZlJTIwZXZlciUyMGJlZW4lMjB0byUyMGElMjBmb3Jlc3QlMjBvciUyMG5vdC4lMjIlMkMlMjJCdXQlMjBJJTIwZ3Vlc3MlMjB5b3UnZCUyMGFncmVlJTIwdGhhdCUyMHBsYWNlcyUyMHdpdGglMjBsb3RzJTIwb2YlMjBwbGFudHMlMjB0ZW5kJTIwdG8lMjBoYXZlJTIwYmV0dGVyJTIwYWlyLiUyMiUyQyUyMkl0J3MlMjBmYWlyJTIwdG8lMjBzYXklMjB0aGF0JTIwdGhpcyUyMGZvcmVzdCUyMGlzJTIwbGlrZSUyMGElMjBwdWIlMjBvZiUyMG94eWdlbi4lMjIlMkMlMjJBbmQlMjBpdCdzJTIwcmVsYXhpbmclMjBlbm91Z2glMjBqdXN0JTIwYnklMjBicmVhdGhpbmcuJTIyJTJDJTIyQW5vdGhlciUyMHRoaW5nJTIyJTJDJTIydGhhdCUyMiUyQyUyMm1ha2VzJTIwdGhpcyUyMHBsYWNlJTIwYSUyMGdvb2QlMjBmb3IlMjByZWxheGluZyUyMGlzJTIyJTJDJTIydGhhdCUyMiUyQyUyMnRoaXMlMjBmb3Jlc3QlMjBpcyUyMHRvdGFsbHklMjBhd2F5JTIwZnJvbSUyMGFsbCUyMHRoZSUyMGh1c3RsZSUyMiUyQyUyMmFuZCUyMiUyQyUyMmJ1c3RsZSUyMG9mJTIwcmVhbCUyMGxpZmUuJTIyJTJDJTIySSUyMG1lYW4lMkMlMjBpdCdzJTIwYSUyMGdvb2QlMjBwbGFjZSUyMHRvJTIwZXNjYXBlJTIwZnJvbSUyMHRoZSUyMGNpdHkuJTIyJTJDJTIyQW5kJTIwZ2V0JTIwY2xvc2UlMjB0byUyME1vdGhlciUyME5hdHVyZS4lMjIlMkMlMjJZZWFoJTJDJTIwdGhhdCdzJTIwYmFzaWNhbGx5JTIwd2hhdCUyMEklMjB3YW50JTIwdG8lMjBzYXklMjBhbmQlMjB0aGFuayUyMHlvdSUyMGZvciUyMGxpc3RlbmluZy4lMjIlMkMlMjJEZXNjcmliZSUyMHNvbWV0aGluZyUyMHlvdSUyMHJlYWxseSUyMHdhbnQlMjB0byUyMGJ1eSUyMGluJTIwdGhlJTIwZnV0dXJlLiUyMiUyQyUyMllvdSUyMHNob3VsZCUyMHNheS4lMjIlMkMlMjJXaGF0JTIwaXQlMjBpcy4lMjIlMkMlMjJXaGVuJTIweW91JTIwd2lsbCUyMGJ1eSUyMGl0LiUyMiUyQyUyMldoZXJlJTIweW91JTIwd2lsbCUyMGJ1eSUyMGl0LiUyMiUyQyUyMkFuZCUyMGV4cGxhaW4lMjB3aHklMjB5b3UlMjB3YW50JTIwdG8lMjBidXklMjBpdC4lMjIlMkMlMjJUaGUlMjBlbGVjdHJvbmljJTIwbWFjaGluZSUyMEknZCUyMGxpa2UlMjB0byUyMGJ1eSUyMGlzJTIwYSUyMGp1aWNlci4lMjIlMkMlMjJUaGUlMjBpZGVhJTIwb2YlMjBidXlpbmclMjBhJTIwanVpY2VyJTIwaXMlMjBpbnNwaXJlZCUyMGJ5JTIwYSUyMHBpZWNlJTIwb2YlMjBuZXdzJTIwSSUyMHNhdyUyMG9uJTIwVFYlMjBhYm91dCUyMGZha2VkJTIwanVpY2UlMjBzb2xkJTIwb24lMjBtYXJrZXQuJTIyJTJDJTIyVGhlbiUyMEklMjByZWFsaXplZCUyMHRoYXQlMjBtb3N0JTIwanVpY2UlMjB3ZSUyMGNhbiUyMGJ1eSUyMGZyb20lMjB0aGUlMjBtYXJrZXQlMjBpc24ndCUyMHJlYWwlMjBqdWljZS4lMjIlMkMlMjJCdXQlMjBvZnRlbiUyMGNvbnRhaW4lMjBhJTIwbG90JTIwb2YlMjBzdWdhciUyMGFuZCUyMG90aGVyJTIwY2hlbWljYWxzLiUyMiUyQyUyMldoaWNoJTIwbWFrZSUyMHRoZSUyMGRyaW5rJTIwdGFzdGUlMjBsaWtlJTIwanVpY2UuJTIyJTJDJTIyVGhpcyUyMGlzJTIwYXdmdWwuJTIyJTJDJTIyQmVjYXVzZSUyMHRha2luZyUyMGluJTIwdG9vJTIwbXVjaCUyMHN1Z2FyJTIwY2FuJTIwY2F1c2UlMjBhJTIwbG90JTIwbWFueSUyMGhlYWx0aCUyMHByb2JsZW1zLiUyMiUyQyUyMlN1Y2glMjBhcyUyMGRpYWJldGVzJTIwYW5kJTIwb2Jlc2l0eS4lMjIlMkMlMjJTbyUyMHRoYXQncyUyMHdoeSUyMEklMjB3YW50JTIwdG8lMjBidXklMjBhJTIwanVpY2VyLiUyMiUyQyUyMkklMjBhY3R1YWxseSUyMGtub3clMjBhJTIwdmVyeSUyMHNwZWNpZmljJTIwYnJhbmQlMjBvZiUyMGp1aWNlciUyMEklMjB3YW50JTIwdG8lMjBidXklMjBjYWxsZWQlMjBTdGFyJTIwSnVpY2VyLiUyMiUyQyUyMkJlY2F1c2UlMjBJJTIwc2F3JTIwaXQlMjBvbiUyMGElMjBzaG9wcGluZyUyMHByb2dyYW0lMjBvbiUyMFRWLiUyMiUyQyUyMlRoYXQlMjBqdWljZXIlMjBoYXMlMjBhJTIwZ2lnYW50aWMlMjB0dWJlJTIwb24lMjB0aGUlMjB0b3AuJTIyJTJDJTIyU28lMjB5b3UlMjBjYW4lMjBwdXQlMjBpbiUyMHdoYXRldmVyJTIwZnJ1aXQlMjB5b3UlMjB3YW50LiUyMiUyQyUyMkklMjBsb3ZlJTIwdGhlJTIwaWRlYSUyMHRoYXQlMjB5b3UlMjBjYW4lMjBibGVuZCUyMGRpZmZlcmVudCUyMGZydWl0cyUyMHRvZ2V0aGVyLiUyMiUyQyUyMkxpa2UlMjBhcHBsZSUyMHdpdGglMjBiYW5hbmElMkMlMjBmb3IlMjBleGFtcGxlLiUyMiUyQyUyMkFzJTIwd2VsbCUyMGFzJTIwdGhpcyUyQyUyMGFub3RoZXIlMjB1c2VmdWwlMjBmZWF0dXJlJTIwb2YlMjB0aGlzJTIwanVpY2VyJTIwaXMlMjB0aGF0JTIweW91JTIwY2FuJTIwcHV0JTIwYSUyMGZpbHRlciUyMGluc2lkZSUyMG9mJTIwdGhlJTIwanVpY2VyJTIwaWYlMjB5b3UlMjB3YW50JTIwdG8uJTIyJTJDJTIyVGhpcyUyMGlzJTIwZ3JlYXQuJTIyJTJDJTIyQmVjYXVzZSUyMHNvbWUlMjBwZW9wbGUlMjBsaWtlJTIwcHVyZSUyMGp1aWNlJTIwYnV0JTIwb3RoZXJzJTIwcHJlZmVyJTIwanVpY2UlMjB3aXRoJTIwYml0ZXMlMjBpbiUyMGl0LiUyMiUyQyUyMkFuZCUyMGZpbmFsbHklMjB0aGUlMjBqdWljZXIlMjBjb21lcyUyMHdpdGglMjBhJTIwd2hvbGUlMjBzZXQlMjBvZiUyMGJsYWRlcy4lMjIlMkMlMjJXaGljaCUyMGFsbG93JTIweW91JTIwdG8lMjBzcXVlZXplJTIwYWxtb3N0JTIwYW55JTIwZnJ1aXQlMjBwb3NzaWJsZS4lMjIlMkMlMjJTbyUyMHRoYXQncyUyMHdoYXQlMjBJJTIwd2FudCUyMHRvJTIwYnV5LiUyMiUyQyUyMkFuZCUyMEklMjB0aGluayUyMGJ1eWluZyUyMGElMjBqdWljZXIlMjB3b3VsZCUyMGhlbHAlMjBtZSUyMGtlZXAlMjBhJTIwYmFsYW5jZWQlMjBkaWV0LiUyMiUyQyUyMkluJTIwb3RoZXIlMjB3b3JkcyUyQyUyMEklMjB3b3VsZCUyMGJlJTIwYWJsZSUyMHRvJTIwdGFrZSUyMGluJTIwc29tZSUyMHZpdGFtaW4lMjBDJTIwc2ltcGx5JTIwYnklMjBkcmlua2luZyUyMGElMjBnbGFzcyUyMG9mJTIwZnJlc2gtbWFkZSUyMGp1aWNlLiUyMiUyQyUyMkFwYXJ0JTIwZnJvbSUyMHRoYXQlMkMlMjB0aGUlMjBwcmljZSUyMGlzJTIwYWZmb3JkYWJsZS4lMjIlMkMlMjJXaGljaCUyMGlzJTIwc29tZXRoaW5nJTIwYmV0d2VlbiUyMDUwMCUyMHRvJTIwODAwLiUyMiUyQyUyMlNvJTIwSSUyMHJlYWxseSUyMHdhbnQlMjB0byUyMGJ1eSUyMG9uZS4lMjIlNUQlMkMlMjJwcm9udW5jaWF0aW9uJTIyJTNBJTIydXMlMjIlMkMlMjJ0aW1lc3RhbXAlMjIlM0ExNzY5OTEyMTA3OTg3JTJDJTIydGl0bGUlMjIlM0ElMjJEZXNjcmliZSUyMGElMjBsb25nJTIwam91cm5leSUyMG9yJTIwc2hvcnQlMjB0cmlwcyUyMHlvdSUyMHdvdWxkJTIwbC4uLiUyMiU3RA==&id=practice_1769912107987_mgk5ad0","writing":"https://www.britannica.com/procon","other":"https://liuyanglouise.github.io/speaking-gendu-003/#student-practice?data=JTdCJTIyc2VudGVuY2VzJTIyJTNBJTVCJTIyTXVzZXVtcy4lMjIlMkMlMjJBcmUlMjB0aGVyZSUyMGFueSUyMG11c2V1bXMlMjBpbiUyMHlvdXIlMjBob21ldG93biUzRiUyMiUyQyUyMlN1cmUuJTIyJTJDJTIySSUyMGd1ZXNzJTIwdGhlcmUlMjBhcmUlMjBsaWtlJTIwbW9yZSUyMHRoYW4lMjAyMCUyMG11c2V1bXMlMjBvZiUyMGRpZmZlcmVudCUyMHRoZW1lcyUyMGluJTIwbXklMjBob21ldG93bi4lMjIlMkMlMjJCdXQlMjBJJ3ZlJTIwb25seSUyMGJlZW4lMjB0byUyMGElMjBmZXcuJTIyJTJDJTIyRG8lMjB5b3UlMjB0aGluayUyMG11c2V1bXMlMjBhcmUlMjB1c2VmdWwlMjBmb3IlMjB2aXNpdG9ycyUyMHRvJTIweW91ciUyMGhvbWV0b3duJTNGJTIyJTJDJTIyV2VsbCUyQyUyMEknZCUyMHNheSUyMG5vdCUyMHJlYWxseS4lMjIlMkMlMjJJJTIwbWVhbiUyMGRlc3BpdGUlMjB0aGUlMjBmYWN0JTIwdGhhdCUyMHdlJTIwaGF2ZSUyMHF1aXRlJTIwYSUyMGxvdCUyMG11c2V1bXMlMjBpbiUyMG15JTIwaG9tZXRvd24uJTIyJTJDJTIyTm9uZSUyMG9mJTIwdGhlbiUyMHJlYWxseSUyMHN0YW5kcyUyMG91dC4lMjIlMkMlMjJBbmQlMjBJJTIwbWVhbiUyMHZpc2l0b3JzJTIwbWF5JTIwcHJlZmVyJTIwdG8lMjBnbyUyMHRvJTIwc29tZSUyMHNjZW5pYyUyMHBsYWNlcyUyMHRoYXQlMjBhcmUlMjBtb3JlJTIwZmFtb3VzJTIwdGhhbiUyMGxvY2FsJTIwbXVzZXVtcy4lMjIlMkMlMjJEbyUyMHlvdSUyMG9mdGVuJTIwdmlzaXQlMjBhJTIwbXVzZXVtJTNGJTIyJTJDJTIySSUyMHVzZWQlMjB0byUyMHZpc2l0JTIwbXVzZXVtcyUyMHF1aXRlJTIwb2Z0ZW4lMjB3aGVuJTIwSSUyMHdhcyUyMGluJTIwcHJpbWFyeSUyMHNjaG9vbC4lMjIlMkMlMjJTaW5jZSUyMHZpc2l0aW5nJTIwbXVzZXVtcyUyMHdhcyUyMGElMjBwYXJ0JTIwb2YlMjB0aGUlMjBjdXJyaWN1bHVtJTIwYXQlMjB0aGF0JTIwdGltZS4lMjIlMkMlMjJIb3dldmVyJTJDJTIwbm93JTIwSSUyMGp1c3QlMjBkb24ndCUyMGdvJTIwdG8lMjBtdXNldW1zJTIwdGhhdCUyMG9mdGVuLiUyMiUyQyUyMlByb2JhYmx5JTIwYmVjYXVzZSUyMHRoZXJlJTIwYXJlbid0JTIwbWFueSUyMG5ldyUyMG11c2V1bXMlMjBiZWVuJTIwb3BlbmVkJTIwaW4lMjBteSUyMGhvbWV0b3duLiUyMiUyQyUyMkJ1dCUyMGlmJTIwdGhlcmUlMjB3YXMlMjBhJTIwbmV3JTIwbXVzZXVtJTIwSSUyMHdvdWxkJTIwZGVmaW5pdGVseSUyMGdvJTIwYW5kJTIwaGF2ZSUyMGElMjBsb29rLiUyMiUyQyUyMkRpZCUyMHlvdSUyMGdvJTIwdG8lMjBhbnklMjBtdXNldW1zJTIwd2hlbiUyMHlvdSUyMHdlcmUlMjBhJTIwY2hpbGQlM0YlMjIlMkMlMjJZZXMlMkMlMjB2aXNpdGluZyUyMG11c2V1bXMlMjB3YXMlMjBhJTIwcGFydCUyMHRoZSUyMGN1cnJpY3VsdW0lMjBpbiUyMHRoZSUyMHByaW1hcnklMjBzY2hvb2wuJTIyJTJDJTIySSUyMGNhbiUyMHJlbWVtYmVyJTIwdGhhdCUyMHdlJTIwdXNlZCUyMHRvJTIwaGF2ZSUyMHNvbWUlMjBvZiUyMG91ciUyMHNjaWVuY2UlMjBhbmQlMjBhcnQlMjBjbGFzc2VzJTIwaW4lMjB0aGUlMjBtdXNldW1zLiUyMiUyQyUyMkFuZCUyMEklMjBndWVzcyUyMGl0J3MlMjB0cnVlJTIwdG8lMjBzYXklMjB0aGF0JTIwcHJldHR5JTIwbXVjaCUyMGV2ZXJ5Ym9keSUyMGVuam95ZWQlMjB0aGlzJTIwa2luZCUyMG9mJTIwY2xhc3Nlcy4lMjIlMkMlMjJTaW5jZSUyMHRoZXklMjB3ZXJlJTIwdXN1YWxseSUyMG1vcmUlMjBpbnRlcmVzdGluZyUyMHRoYW4lMjBnb2luZyUyMHRocm91Z2glMjB0ZXh0JTIwYm9va3MlMjBhbmQlMjB0YWtpbmclMjBub3RlcyUyMGluJTIwdGhlJTIwY2xhc3Nyb29tLiUyMiUyQyUyMldoZW4lMjB3YXMlMjB0aGUlMjBsYXN0JTIwdGltZSUyMHlvdSUyMHZpc2l0ZWQlMjBhJTIwbXVzZXVtJTNGJTIyJTJDJTIySSUyMGd1ZXNzJTIwaXQncyUyMG1vcmUlMjB0aGFuJTIwb25lJTIweWVhciUyMHNpbmNlJTIwbGFzdCUyMHRpbWUlMjBJJTIwdmlzaXRlZCUyMGElMjBtdXNldW0uJTIyJTJDJTIySWYlMjBJJTIwcmVtZW1iZXIlMjBjb3JyZWN0bHklMkMlMjBpdCUyMHdhcyUyMGElMjBIb2xvY2F1c3QlMjBtdXNldW0lMjBpbiUyMFdhc2hpbmd0b24lMjBEQy4lMjIlMkMlMjJBbmQlMjBpdCUyMHdhcyUyMHZlcnklMjBpbXByZXNzaXZlLiUyMiUyQyUyMkklMjBtZWFuJTIwSSUyMGxlYXJuZWQlMjBhYm91dCUyMHRoaXMlMjBwZXJpb2QlMjBvZiUyMGhpc3RvcnklMjBiZWZvcmUuJTIyJTJDJTIyQnV0JTIwaXQlMjB3YXMlMjB1bnRpbCUyMEklMjB2aXNpdGVkJTIwdGhpcyUyMG11c2V1bSUyMHRoYXQlMjBJJTIwc3RhcnRlZCUyMHRvJTIwcmVhbGx5JTIwdW5kZXJzdGFuZCUyME5henRpJTJDJTIwY29uY2VudHJhdGlvbiUyMGNhbXAlMkMlMjBldGMuJTIyJTJDJTIyRG8lMjB5b3UlMjB0aGluayUyMG11c2V1bXMlMjBhcmUlMjBpbXBvcnRhbnQlM0YlMjIlMkMlMjJZZXMlMkMlMjBJJTIwZ3Vlc3MlMjBtdXNldW1zJTIwYXJlJTIwb2YlMjBncmVhdCUyMGltcG9ydGFuY2UuJTIyJTJDJTIyVGhlJTIwbGFyZ2VzdCUyMHJlYXNvbiUyMGJlaW5nJTIwdGhhdCUyMG11c2V1bXMlMjBhcmUlMjBwbGFjZXMlMjB0aGF0JTIwcHJlY2lvdXMlMjBvYmplY3RzJTIwYXJlJTIwcHJlc2VydmVkLiUyMiUyQyUyMlRoYXQncyUyMG9uZSUyMHRoaW5nLiUyMiUyQyUyMkFuZCUyMGFub3RoZXIlMjByZWFzb24lMjBpcyUyMHRoYXQlMjBtdXNldW1zJTIwcGxheSUyMGElMjBsYXJnZSUyMHJvbGUlMjBpbiUyMHRlcm1zJTIwZWR1Y2F0aW9uLiUyMiUyQyUyMlNpbmNlJTIwcGVvcGxlJTIwY2FuJTIwbGVhcm4lMjBxdWl0ZSUyMGElMjBsb3QlMjBieSUyMHZpc2l0aW5nJTIwYSUyMG11c2V1bS4lMjIlMkMlMjJEbyUyMHlvdSUyMHRoaW5rJTIwaXQncyUyMHN1aXRhYmxlJTIwZm9yJTIwbXVzZXVtcyUyMHRvJTIwc2VsbCUyMHRoaW5ncyUyMHRvJTIwdmlzaXQlM0YlMjIlMkMlMjJXZWxsJTJDJTIwc29tZXRpbWVzJTIwc2hvcHMlMjBpbiUyMG11c2V1bXMlMjBjYW4lMjBiZSUyMGElMjBsaXR0bGUlMjBiaXQlMjBhbm5veWluZy4lMjIlMkMlMjJCdXQlMjBpdCdzJTIwbm90JTIwYWxsJTIwdGhhdCUyMHVuYWNjZXB0YWJsZS4lMjIlMkMlMjJJJTIwbWVhbiUyMHNvbWV0aW1lcyUyMHRoaW5ncyUyMHNvbGQlMjBpbiUyMG11c2V1bXMlMjBjYW4lMjBldmVuJTIwYmUlMjBhJTIwc3VwcGxlbWVudCUyMGZvciUyMHZpc2l0b3JzJTIwdG8lMjBrbm93JTIwbW9yZSUyMGFib3V0JTIwdGhlJTIwdGhpbmdzJTIwZXhoaWJpdGVkJTIwaW4lMjB0aGUlMjBtdXNldW0uJTIyJTJDJTIyRm9yJTIwZXhhbXBsZSUyMGxhc3QlMjB0aW1lJTIwd2hlbiUyMEklMjB2aXNpdGVkJTIwYSUyMEhvbG9jYXVzdCUyMG11c2V1bSUyMGluJTIwV2FzaGluZ3Rvbi4lMjIlMkMlMjJJJTIwYm91Z2h0JTIwYSUyMGJvb2slMjBpbiUyMHRoZSUyMG11c2V1bSUyMGNhbGxlZCUyMG5pZ2h0LiUyMiUyQyUyMkFuZCUyMGFmdGVyJTIwcmVhZGluZyUyMHRoYXQlMjBib29rJTJDJTIwSSd2ZSUyMGdvdCUyMGElMjBkZWVwZXIlMjB1bmRlcnN0YW5kaW5nJTIwb2YlMjB0aGF0JTIwcGVyaW9kJTIwb2YlMjBoaXN0b3J5LiUyMiUyQyUyMlNvJTIwSSUyMGJlbGlldmUlMjBpdCdzJTIwYSUyMGdvb2QlMjBpZGVhJTIwdG8lMjBzZWxsJTIwdGhpbmdzJTIwaW4lMjBtdXNldW1zLiUyMiUyQyUyMkRvJTIweW91JTIwbGlrZSUyMG11c2V1bXMlM0YlMjIlMkMlMjJZZXMlMkMlMjBJJTIwZG8uJTIyJTJDJTIySSUyMGxvdmUlMjB2aXNpdGluZyUyMG11c2V1bXMuJTIyJTJDJTIyTm8lMjBtYXR0ZXIlMjBpdCUyMGlzJTIwYSUyMG11c2V1bSUyMGFib3V0JTIwc2NpZW5jZSUyMGFuZCUyMHRlY2hub2xvZ3klMjBvciUyMGFydCUyMGFuZCUyMGhpc3RvcnkuJTIyJTJDJTIySSUyMGxvdmUlMjBpdCUyMGluJTIwdGhlJTIwc2Vuc2UlMjB0aGF0JTIwaXQncyUyMGElMjBnb29kJTIwd2F5JTIwdG8lMjBsZWFybmluZyUyMHN0dWZmcy4lMjIlMkMlMjJBbmQlMjBzb21ldGltZXMlMjB2aXNpdGluZyUyMG11c2V1bXMlMjBjYW4lMjBiZSUyMGElMjB2ZXJ5JTIwcmVsYXhpbmclMjBleHBlcmllbmNlLiUyMiUyQyUyMlJlYWRpbmcuJTIyJTJDJTIyV2hhdCUyMGtpbmRzJTIwb2YlMjBib29rcyUyMGRvJTIweW91JTIwbGlrZSUyMHRvJTIwcmVhZCUzRiUyMiUyQyUyMkknZCUyMHNheSUyMEklMjBsaWtlJTIwcmVhZGluZyUyMHF1aXRlJTIwYSUyMHZhcmlldHklMjBvZiUyMGJvb2tzLiUyMiUyQyUyMkJvdGglMjBmaWN0aW9uJTIwYXMlMjB3ZWxsJTIwYXMlMjBub25maWN0aW9uLiUyMiUyQyUyMlNvJTIwZm9yJTIwZXhhbXBsZSUyQyUyMEknbSUyMGElMjBiaWclMjBmYW4lMjBvZiUyMGRldGVjdGl2ZSUyMG5vdmVscy4lMjIlMkMlMjJCZWNhdXNlJTIwSSUyMGVuam95JTIwdHJ5aW5nJTIwdG8lMjBzb2x2ZSUyMHRoZSUyMGNyaW1lcyUyMHdoaWxlJTIwSSdtJTIwcmVhZGluZy4lMjIlMkMlMjJBbHRob3VnaCUyMEklMjBoYXZlJTIwdG8lMjBhZG1pdCUyMEknbSUyMHByZXR0eSUyMHVzZWxlc3MlMjBhdCUyMGl0JTIwbW9zdCUyMG9mJTIwdGhlJTIwdGltZSElMjIlMkMlMjJBbmQlMjBhcyUyMGZvciUyMG5vbmZpY3Rpb24lMjBzdHVmZiUyQyUyMEknZCUyMHNheSUyMEklMjBtb3N0bHklMjBsaWtlJTIwcmVhZGluZyUyMHRoaW5ncyUyMGxpa2UlMjBzZWxmLWhlbHAlMjBib29rcyUyMiUyQyUyMmFuZCUyMGJpb2dyYXBoaWVzJTIwb2YlMjB2YXJpb3VzJTIwcGVvcGxlJTIwSSUyMGFkbWlyZS4lMjIlMkMlMjJTdWNoJTIwYXMlMjB0aGUlMjBuZXclMjBib29rJTIwb24lMjBTdGV2ZSUyMEpvYnMlMkMlMjB3aGljaCUyMEknbSUyMGN1cnJlbnRseSUyMGluJTIwdGhlJTIwbWlkZGxlJTIwb2YlMjByZWFkaW5nLiUyMiUyQyUyMkFyZSUyMHlvdSUyMHJlYWRpbmclMjBhbnklMjBib29rcyUyMGF0JTIwdGhlJTIwbW9tZW50JTNGJTIyJTJDJTIyWWVhaCUyQyUyMEknbSUyMGFjdHVhbGx5JTIwaGFsZndheSUyMHRocm91Z2glMjBhJTIwY291cGxlJTIwb2YlMjBib29rcyUyMHJpZ2h0JTIwbm93LiUyMiUyQyUyMk9uZSUyMG9mJTIwdGhlbSdzJTIwYSUyMG5vdmVsJTIwd2hpY2glMjBhJTIwZnJpZW5kJTIwb2YlMjBtaW5lJTIwbGVudCUyMG1lLiUyMiUyQyUyMkFuZCUyMHRoZSUyMG90aGVyJTIwaXMlMjBhJTIwYm9vayUyMG9uJTIwYnVzaW5lc3MlMkMlMjB3aGljaCUyMEklMjBib3VnaHQlMjBhYm91dCUyMGElMjB5ZWFyJTIwYWdvJTJDJTIwYnV0JTIwZGlkbid0JTIwZ2V0JTIwcm91bmQlMjB0byUyMHJlYWRpbmclMjB1bnRpbCUyMG5vdy4lMjIlMkMlMjJDb21wdXRlcnMuJTIyJTJDJTIyRG8lMjB5b3UlMjB1c2UlMjBjb21wdXRlcnMlMjB2ZXJ5JTIwbXVjaCUzRiUyMiUyQyUyMlllcyUyQyUyMHByZXR0eSUyMG11Y2glMjBldmVyeWRheS4lMjIlMkMlMjJBbmQlMjBJJTIwd291bGQlMjBzYXklMjBpdCdzJTIwYW4lMjBpbmRpc3BlbnNhYmxlJTIwcGFydCUyMG9mJTIwbXklMjBsaWZlLiUyMiUyQyUyMkklMjBjYW4lMjBsaXRlcmFsbHklMjBkbyUyMGFueXRoaW5nJTIwb24lMjBteSUyMGNvbXB1dGVyJTIwbGlrZSUyMG9ubGluZSUyMHNob3BwaW5nJTJDJTIwcmVhZGluZyUyMG5ld3MlMkMlMjBkb2luZyUyMG15JTIwaG9tZXdvcmslMkMlMjIlMkMlMjJ3YXRjaGluZyUyMFRWJTIwcHJvZ3JhbXMlMjIlMkMlMjJhbmQlMjIlMkMlMjJzbyUyMG9uLiUyMiUyQyUyMkNvbXB1dGVycyUyMGFyZSUyMGp1c3QlMjBzbyUyMHVzZWZ1bCUyMHRoYXQlMjBJJTIwY2FuJ3QlMjBsaXZlJTIwd2l0aG91dCUyMGl0LiUyMiUyQyUyMldoZW4lMjBkbyUyMHlvdSUyMHVzZSUyMGElMjBjb21wdXRlciUzRiUyMiUyQyUyMkklMjB1c2UlMjBhJTIwY29tcHV0ZXIlMjBib3RoJTIwYXQlMjBzY2hvb2wlMjB0aW1lJTIwYW5kJTIwbGVpc3VyZSUyMHRpbWUuJTIyJTJDJTIyV2hhdCUyMGRvJTIweW91JTIwdXNlJTIwY29tcHV0ZXJzJTIwZm9yJTNGJTIyJTJDJTIySSUyMGNhbiUyMGxpdGVyYWxseSUyMGRvJTIwYW55dGhpbmclMjBvbiUyMG15JTIwY29tcHV0ZXIlMjBsaWtlJTIwb25saW5lJTIwc2hvcHBpbmclMkMlMjByZWFkaW5nJTIwbmV3cyUyQyUyMGRvaW5nJTIwbXklMjBob21ld29yayUyQyUyMiUyQyUyMndhdGNoaW5nJTIwVFYlMjBwcm9ncmFtcyUyQyUyMGV0Yy4lMjIlMkMlMjJDb21wdXRlcnMlMjBhcmUlMjBqdXN0JTIwc28lMjB1c2VmdWwlMjB0aGF0JTIwSSUyMGNhbid0JTIwbGl2ZSUyMHdpdGhvdXQlMjBpdC4lMjIlMkMlMjJXaGVuJTIwZGlkJTIweW91JTIwc3RhcnQlMjB1c2luZyUyMGNvbXB1dGVycyUzRiUyMiUyQyUyMkkndmUlMjBzdGFydGVkJTIwdG8lMjB1c2UlMjBjb21wdXRlcnMlMjBzaW5jZSUyMGtpbmRlcmdhcnRlbi4lMjIlMkMlMjJJZiUyMEklMjByZW1lbWJlciUyMGNvcnJlY3RseSUyQyUyMG15JTIwZmFtaWx5JTIwYm91Z2h0JTIwdGhlJTIwdmVyeSUyMGZpcnN0JTIwY29tcHV0ZXIlMjB3aGVuJTIwSSUyMHdhcyUyMDUlMjB5ZWFycyUyMG9sZC4lMjIlMkMlMjJBbmQlMjBhdCUyMHRoYXQlMjB0aW1lJTIwbXklMjBtb20lMjBzdGFydGVkJTIwdG8lMjB0ZWFjaCUyMG1lJTIwaG93JTIwdG8lMjB1c2UlMjBzb21lJTIwYmFzaWMlMjBzb2Z0d2FyZXMlMjBvbiUyMGNvbXB1dGVycy4lMjIlMkMlMjJIb3clMjBkaWQlMjB5b3UlMjBsZWFybiUyMHRvJTIwdXNlJTIwY29tcHV0ZXJzJTNGJTIyJTJDJTIyV2VsbCUyQyUyMGp1c3QlMjBsaWtlJTIwdGhlJTIwbWFqb3JpdHklMjBvZiUyMHBlb3BsZSUyMG15JTIwYWdlJTIwaW4lMjBDaGluYSUyQyUyMiUyQyUyMkklMjBsZWFybmVkJTIwbW9zdCUyMGNvbXB1dGVyJTIwc2tpbGxzJTIwaW4lMjBpbmZvcm1hdGlvbiUyMHRlY2hub2xvZ3klMjBjbGFzcyUyMGluJTIwc2Nob29sLiUyMiUyQyUyMkFkZGl0aW9uYWxseSUyQyUyMG15JTIwbW9tJTIwYWxzbyUyMHRhdWdodCUyMG1lJTIwaG93JTIwdG8lMjB1c2UlMjBzb21lJTIwYmFzaWMlMjBzb2Z0d2FyZSUyMGxpa2UlMjBvZmZpY2UlMjBhbmQlMjBJRSUyMGJyb3dzZXIuJTIyJTJDJTIyV2hlbiUyMEklMjB3YXMlMjBhdCUyMGElMjBwcmV0dHklMjB5b3VuZyUyMGFnZS4lMjIlMkMlMjJIYXZlJTIwY29tcHV0ZXJzJTIwY2hhbmdlZCUyMHlvdXIlMjBsaWZlJTIwaW4lMjBhbnl3YXklM0YlMjIlMkMlMjJZZXMlMkMlMjBJJTIwd291bGQlMjBzYXklMjBzby4lMjIlMkMlMjJDb21wdXRlcnMlMjBoYXZlJTIwY2hhbmdlZCUyMHRoZSUyMHdheSUyMEklMjBkbyUyMG1hbnklMjB0aGluZ3MuJTIyJTJDJTIyU3VjaCUyMGFzJTIwc2hvcHBpbmclMkMlMjByZWFkaW5nJTJDJTIwc29jaWFsaXppbmclMkMlMjBldGMuJTIyJTJDJTIyT24lMjBvbmUlMjBoYW5kJTJDJTIwdGhlc2UlMjBjaGFuZ2VzJTIwYXJlJTIwZ29vZC4lMjIlMkMlMjJCZWNhdXNlJTIwdGhleSd2ZSUyMGJyb3VnaHQlMjBxdWl0ZSUyMGElMjBsb3QlMjBjb252ZW5pZW5jZSUyMHRvJTIwbXklMjBsaWZlLiUyMiUyQyUyMk9uJTIwdGhlJTIwb3RoZXIlMjBoYW5kJTJDJTIwdGhlc2UlMjBjaGFuZ2VzJTIwbWF5JTIwYmUlMjBkYW5nZXJvdXMuJTIyJTJDJTIyRHVlJTIwdG8lMjB0aGUlMjBmYWN0JTIwdGhhdCUyMEkndmUlMjBzcGVudCUyMHRvbyUyMG11Y2glMjB0aW1lJTIwZXZlcnlkYXklMjBzaXR0aW5nJTIwaW4lMjBmcm9udCUyMG9mJTIwdGhlJTIwY29tcHV0ZXIlMjBhbmQlMjBzdGFycmluZyUyMGF0JTIwdGhlJTIwc2NyZWVuLiUyMiUyQyUyMkFyZSUyMGNvbXB1dGVycyUyMHVzZWQlMjBtdWNoJTIwaW4lMjB5b3VyJTIwY291bnRyeSUzRiUyMiUyQyUyMlllcyUyQyUyMEklMjB3b3VsZCUyMHNheSUyMHNvLiUyMiUyQyUyMkFzJTIweW91JTIwY291bGQlMjBwcm9iYWJseSUyMGltYWdpbmUlMkMlMjBhbG1vc3QlMjBldmVyeSUyMGhvdXNlaG9sZCUyMG93bnMlMjBhdCUyMGxlYXN0JTIwb25lJTIwY29tcHV0ZXIuJTIyJTJDJTIyQW5kJTIwY29tcHV0ZXJzJTIwY2FuJTIwYmUlMjBzZWVuJTIwZXZlcnl3aGVyZSUyMGFuZCUyMGluJTIwYWxtb3N0JTIwZXZlcnklMjBvY2Nhc2lvbnMuJTIyJTJDJTIyU3VjaCUyMGFzJTIwaW4lMjB0aGUlMjBtZWV0aW5nJTJDJTIwaW4lMjBzY2hvb2xzJTIwYW5kJTIwZXZlbiUyMG9uJTIwd2VkZGluZ3MuJTIyJTJDJTIyU28lMjBJJ2QlMjBzYXklMjBjb21wdXRlcnMlMjBhcmUlMjB1c2VkJTIwcXVpdGUlMjBhJTIwbG90JTIwaW4lMjBDaGluYS4lMjIlMkMlMjJEbyUyMHlvdSUyMHRoaW5rJTIwY29tcHV0ZXJzJTIwYXJlJTIwdXNlZnVsJTJGJTIwaW1wb3J0YW50JTIwaW4lMjBldmVyeWRheSUyMGxpZmUlM0YlMjIlMkMlMjJZZXMlMkMlMjBJJTIwd291bGQlMjBzYXklMjBpdCdzJTIwYW4lMjBpbmRpc3BlbnNhYmxlJTIwcGFydCUyMG9mJTIwbXklMjBsaWZlLiUyMiUyQyUyMkklMjBjYW4lMjBsaXRlcmFsbHklMjBkbyUyMGFueXRoaW5nJTIwb24lMjBteSUyMGNvbXB1dGVyJTIwbGlrZSUyMG9ubGluZSUyMHNob3BwaW5nJTJDJTIwcmVhZGluZyUyMG5ld3MlMkMlMjBkb2luZyUyMG15JTIwaG9tZXdvcmslMkMlMjIlMkMlMjJ3YXRjaGluZyUyMFRWJTIwcHJvZ3JhbXMlMkMlMjBldGMuJTIyJTJDJTIyQ29tcHV0ZXJzJTIwYXJlJTIwanVzdCUyMHNvJTIwdXNlZnVsJTIwdGhhdCUyMEklMjBjYW4ndCUyMGxpdmUlMjB3aXRob3V0JTIwaXQuJTIyJTJDJTIyRG8lMjB5b3UlMjB0aGluayUyMGNvbXB1dGVycyUyMGhhdmUlMjBjaGFuZ2VkJTIwb3VyJTIwbGl2ZXMlMjBmb3IlMjB0aGUlMjBiZXR0ZXIlM0YlMjIlMkMlMjIlMkYlMjBIb3clMjBDb21wYXJlJTIwdG9kYXklMjYlMjBvdXIlMjBsaXZlcyUyMGluJTIwcHJlLWNvbXB1dGVyJTIwdGltZXMlM0YlMjIlMkMlMjJJdCdzJTIwaGFyZCUyMHRvJTIwanVkZ2UlMjB3aGV0aGVyJTIwaXQncyUyMGJlZW4lMjBiZXR0ZXIuJTIyJTJDJTIySSUyMG1lYW4lMkMlMjBsaWZlJTIwaXMlMjBtdWNoJTIwbW9yZSUyMGNvbnZlbmllbnQlMjB0aGFuJTIwYmVmb3JlJTIwb2YlMjBjb3Vyc2UuJTIyJTJDJTIyQnV0JTIwdGhlcmUlMjBsaWVzJTIwYSUyMGxvdCUyMG9mJTIwcHJvYmxlbXMlMjBzdWNoJTIwYXMlMjB0b28lMjBxdWljayUyMHRoZSUyMHBhY2UlMjBvZiUyMGxpZmUuJTIyJTJDJTIyVG9vJTIwc2VkZW50YXJ5JTIwbGlmZXN0eWxlcy4lMjIlMkMlMjJOb3QlMjB0byUyMG1lbnRpb24lMjB0aGUlMjBsb3QlMjBtYW55JTIwY3liZXIlMjBjcmltZXMlMjBsaWtlJTIwSW50ZXJuZXQlMjBzY2FtJTJDJTIwaWRlbnRpdHklMjB0aGVmdCUyQyUyMGN5YmVyLXRhbGtpbmclMkMlMjB0byUyMG5hbWUlMjBhJTIwZmV3LiUyMiUyQyUyMlNvJTIwaXQncyUyMG5vdCUyMGVhc3klMjB0byUyMHNheSUyMHdoZXRoZXIlMjBvdXIlMjBsaXZlcyUyMGhhdmUlMjBiZWNvbWUlMjBiZXR0ZXIlMjB0aGFuJTIwYmVmb3JlLiUyMiUyQyUyMkRvJTIweW91JTIwdGhpbmslMjBhJTIwY29tcHV0ZXIlMjBjYW4lMjBnaXZlJTIweW91JTIwYmV0dGVyJTIwYWNjZXNzJTIwdG8lMjBrbm93bGVkZ2UlM0YlMjIlMkMlMjJZZXMlMkMlMjBJJ2QlMjBhZ3JlZSUyMHdpdGglMjB0aGF0LiUyMiUyQyUyMkklMjBtZWFuJTIwd2l0aCUyMGNvbXB1dGVycyUyMHdlJTIwYXJlJTIwb2ZmZXIlMjB5b3UlMjBhJTIwZ3JlYXQlMjB2YXJpZXR5JTIwb2YlMjBpbmZvcm1hdGlvbiUyMG9ubGluZS4lMjIlMkMlMjJBbmQlMjB0aGF0J3MlMjBvbmUlMjB0aGluZy4lMjIlMkMlMjJBbm90aGVyJTIwdGhpbmclMjBpcyUyMHRoYXQlMjB5b3UlMjBkb24ndCUyMGhhdmUlMjB0byUyMHdhbGslMjB0byUyMHRoZSUyMGxpYnJhcnklMjBhbmQlMjBzZWFyY2glMjBmb3IlMjBpbmZvcm1hdGlvbiUyMG9uJTIwYSUyMGJvb2slMjBwYWdlJTIwYnklMjBwYWdlLiUyMiUyQyUyMkFuZCUyMHRoZSUyMHNlYXJjaCUyMGVuZ2luZSUyMHdpbGwlMjBkbyUyMGFsbCUyMHRoZSUyMHdvcmslMjBmb3IlMjB5b3UuJTIyJTJDJTIyU28lMjBJJTIwZ3Vlc3MlMjB3ZSUyMGhhdmUlMjBiZXR0ZXIlMjBhY2Nlc3MlMjB0byUyMGtub3dsZWRnZSUyMHZpYSUyMGNvbXB1dGVycy4lMjIlMkMlMjJEbyUyMHlvdSUyMHRoaW5rJTIwdGhlcmUlMjBhcmUlMjBhbnklMjBkaXNhZHZhbnRhZ2VzJTIwdG8lMjB1c2luZyUyMGNvbXB1dGVycyUzRiUyMiUyQyUyMlllcyUyQyUyMGRlZmluaXRlbHkuJTIyJTJDJTIyVGhlJTIwcXVpY2slMjBwYWNlJTIwb2YlMjBsaWZlLiUyMiUyQyUyMlRoZSUyMHNlZGVudGFyeSUyMGxpZmVzdHlsZXMuJTIyJTJDJTIyTm90JTIwdG8lMjBtZW50aW9uJTIwdGhlJTIwbG90JTIwbWFueSUyMGN5YmVyJTIwY3JpbWVzJTIwbGlrZSUyMEludGVybmV0JTIwc2NhbSUyQyUyMGlkZW50aXR5JTIwdGhlZnQlMkMlMjBjeWJlci10YWxraW5nJTIwdG8lMjBuYW1lJTIwYSUyMGZldy4lMjIlMkMlMjJTaW1wbHklMjBiZWNhdXNlJTIwc29jaWFsJTIwbmV0d29ya2luZyUyMHByb3ZpZGVzJTIwYSUyMGx1Y3JhdGl2ZSUyMGhvdGJlZCUyMG9mJTIwb3Bwb3J0dW5pdGllcyUyMGZvciUyMGZyYXVkc3RlcnMuJTIyJTJDJTIyQ29tcHV0ZXJzJTIwYXJlJTIwbm93JTIwdXNlZCUyMGElMjBsb3QlMjBpbiUyMGVkdWNhdGlvbi4lMjIlMkMlMjJXaGF0JTIwZG8lMjB5b3UlMjB0aGluayUyMG9mJTIwdGhpcyUzRiUyMiUyQyUyMkklMjB3b3VsZCUyMHNheSUyMHRoZXJlJTIwYXJlJTIwcXVpdGUlMjBhJTIwbG90JTIwYWR2YW50YWdlcyUyMG9mJTIwdXNpbmclMjBjb21wdXRlcnMlMjBpbiUyMGVkdWNhdGlvbi4lMjIlMkMlMjJGb3IlMjBleGFtcGxlJTJDJTIwdGhlJTIwYmV0dGVyJTIwYWNjZXNzJTIwdG8lMjBrbm93bGVkZ2UuJTIyJTJDJTIyVGhlJTIwbW9yZSUyMGR5bmFtaWMlMjBkZW1vbnN0cmF0ZSUyMG9mJTIwYW4lMjBleHBlcmltZW50JTJDJTIwZXRjLiUyMiUyQyUyMkl0J3MlMjBub3QlMjBoYXJkJTIwdG8lMjBzZWUlMjBzdWNoJTIwZXhhbXBsZXMlMjBpZiUyMHlvdSUyMHN0ZXAlMjBpbnRvJTIwYSUyMGNsYXNzcm9vbS4lMjIlMkMlMjJIb3dldmVyJTJDJTIwdGhlcmUlMjBhcmUlMjBhbHNvJTIwc29tZSUyMGRvd25zaWRlcy4lMjIlMkMlMjJBbmQlMjB0aGUlMjBtYWpvciUyMHByb2JsZW0lMkMlMjBJJTIwdGhpbmslMkMlMjBsaWVzJTIwaW4lMjB0aGUlMjBpbmFjY3VyYWN5JTIwb2YlMjBpbmZvcm1hdGlvbiUyMG9ubGluZS4lMjIlMkMlMjJEbyUyMHlvdSUyMHBsYXklMjBjb21wdXRlciUyMGdhbWVzJTNGJTIyJTJDJTIyTm8lMkMlMjBJJTIwZG9uJ3QlMjBsaWtlJTIwY29tcHV0ZXIlMjBnYW1lcy4lMjIlMkMlMjJBbmQlMjB0aGF0J3MlMjBwcmV0dHklMjBvZGQlMjBmb3IlMjBwZW9wbGUlMjBpbiUyMG15JTIwYWdlJTJDJTIwaXNuJ3QlMjBpdCUzRiUyMiUyQyUyMkklMjBqdXN0JTIwdGhpbmslMjBpdCdzJTIwcXVpdGUlMjBzdHVwaWQlMjB0byUyMGxpdmUlMjBhJTIwbGlmZSUyMGluJTIwdGhlJTIwdmlzdWFsJTIwd29ybGQuJTIyJTJDJTIySW5zdGVhZCUyMG9mJTIwc3BlbmRpbmclMjB0aW1lJTIwd2l0aCUyMHlvdXIlMjByZWFsJTIwbGlmZSUyMGZhbWlsaWVzLiUyMiUyQyUyMkFuZCUyMEklMjBqdXN0JTIwY2FuJ3QlMjB1bmRlcnN0YW5kJTIwd2h5JTIwcGVvcGxlJTIwd291bGQlMjBldmVuJTIwY2FyZSUyMGFib3V0JTIwdGhlaXIlMjBsZXZlbHMlMjBpbiUyMGdhbWVzLiUyMiUyQyUyMldoZW4lMjB0aGVyZSUyMGFyZSUyMHNvJTIwbWFueSUyMG1vcmUlMjBpbXBvcnRhbnQlMjB0aGluZ3MlMjB0byUyMHRha2UlMjBjYXJlJTIwb2YuJTIyJTJDJTIyV2hhdCUyMGRvJTIweW91JTIwZG8lMjB3aGVuJTIweW91ciUyMGNvbXB1dGVyJTIwaGFzJTIwcHJvYmxlbXMlM0YlMjIlMkMlMjJXZWxsJTJDJTIwSSUyMGhhdmUlMjBzb21lJTIwZnJpZW5kcy4lMjIlMkMlMjJBbGwlMjBvZiUyMHRoZW0lMjBhcmUlMjBib3klMjBhcyUyMHlvdSUyMGNvdWxkJTIwcHJvYmFibHklMjBpbWFnaW5lJTJDJTIwd2hvJTIwYXJlJTIwZXhwZXJ0JTIwaW4lMjBjb21wdXRlcnMuJTIyJTJDJTIyU28lMjB3aGVuJTIwSSUyMG1lZXQlMjBhbnklMjBwcm9ibGVtcyUyMEklMjBqdXN0JTIwdHVybiUyMHRvJTIwdGhlbSUyMGZvciUyMGhlbHAuJTIyJTJDJTIyRG8lMjB5b3UlMjB0aGluayUyMGNvbXB1dGVycyUyMGFyZSUyMHBlcmZlY3QlMjBub3clMjBhbmQlMjBkbyUyMHlvdSUyMHRoaW5rJTIwdGhleSUyMG5lZWQlMjBpbXByb3ZlbWVudHMlM0YlMjIlMkMlMjJXZWxsJTJDJTIwSSUyMGJlbGlldmUlMjBub3RoaW5nJTIwd291bGQlMjBiZSUyMHNhaWQlMjBwZXJmZWN0JTIwaW4lMjB0aGUlMjB3b3JsZCUyMGluY2x1ZGluZyUyMGNvbXB1dGVycy4lMjIlMkMlMjJBbmQlMjBpdCdzJTIwcHJldHR5JTIwdHJ1ZSUyMHRvJTIwc2F5JTIwdGhhdCUyMGNvbXB1dGVycyUyMGFyZSUyMGFkdmFuY2luZyUyMHZlcnklMjBxdWlja2x5LiUyMiUyQyUyMkklMjB0aGluayUyMHRoZSUyMGJpZ2dlc3QlMjBpbXByb3ZlbWVudCUyMHRoYXQlMjBzaG91bGQlMjBiZSUyMGRvbmUlMjBpcyUyMGVuaGFuY2luZyUyMHRoZSUyMHNlY3VyaXR5JTIwb2YlMjBhJTIwY29tcHV0ZXIuJTIyJTJDJTIyU3VjaCUyMGFzJTIwcmFpc2luZyUyMHRoZSUyMGFiaWxpdHklMjB0byUyMHJlc2lzdCUyMGN5YmVyJTIwYXR0YWNrcy4lMjIlNUQlMkMlMjJwcm9udW5jaWF0aW9uJTIyJTNBJTIydXMlMjIlMkMlMjJ0aW1lc3RhbXAlMjIlM0ExNzY5OTEyNDE4MjM2JTJDJTIydGl0bGUlMjIlM0ElMjJNdXNldW1zLiU1Q24lNUNuQXJlJTIwdGhlcmUlMjBhbnklMjBtdXNldW1zJTIwaW4lMjB5b3VyJTIwaG9tZXRvd24lM0YlNUNuLi4uJTIyJTdE&id=practice_1769912418236_ke74mof","password":"12341234"};
+        const hasPassword = true;
+        
+        // 初始化显示
+        function initDisplay() {
+            if (!hasPassword) {
+                displayHomework();
+            }
+        }
+        
+        // 显示作业内容
+        function displayHomework() {
+            const container = document.getElementById('homeworkDisplay');
+            let html = '';
+            
+            const subjects = [
+                { id: 'vocab', name: '词汇', emoji: '📚' },
+                { id: 'reading', name: '阅读', emoji: '📖' },
+                { id: 'listening', name: '听力', emoji: '🎧' },
+                { id: 'speaking', name: '口语', emoji: '🗣️' },
+                { id: 'writing', name: '写作', emoji: '✍️' },
+                { id: 'other', name: '其他', emoji: '💌' }
+            ];
+            
+            let hasContent = false;
+            
+            subjects.forEach(subject => {
+                const content = homeworkData[subject.id];
+                if (content && content.trim() !== '') {
+                    hasContent = true;
+                    
+                    // 检查是否是URL
+                    const isUrl = content.startsWith('http://') || content.startsWith('https://');
+                    const displayContent = isUrl 
+                        ? `<a href="${content}" target="_blank">${content}</a>`
+                        : content;
+                    
+                    html += `
+                        <div class="subject-item">
+                            <div class="subject-title">
+                                <span>${subject.emoji}</span>
+                                <span>${subject.name}作业</span>
+                            </div>
+                            <div class="subject-content">${displayContent}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (!hasContent) {
+                html = '<div style="text-align: center; color: #6C757D; padding: 20px;">今日暂无作业，请等待老师布置。</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // 密码验证功能
+        if (hasPassword) {
+            document.getElementById('passwordSubmit').addEventListener('click', function() {
+                const input = document.getElementById('passwordInput').value;
+                const errorMessage = document.getElementById('errorMessage');
+                
+                if (input === homeworkData.password) {
+                    document.getElementById('passwordSection').style.display = 'none';
+                    document.getElementById('contentBox').style.display = 'block';
+                    displayHomework();
+                } else {
+                    errorMessage.style.display = 'block';
+                    document.getElementById('passwordInput').value = '';
+                }
+            });
+            
+            // 支持回车键提交
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('passwordSubmit').click();
+                }
+            });
+        }
+        
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', initDisplay);
+    </script>
+</body>
+</html>
