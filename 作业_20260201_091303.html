@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reborn黑皮书 - 今日作业</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans SC', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #6C757D;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .date {
+            color: #495057;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .content-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .password-section {
+            background: #e8f4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: block;
+        }
+        .password-input {
+            width: 200px;
+            padding: 12px;
+            border: 2px solid #84AFFF;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .password-button {
+            background-color: #84AFFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .password-button:hover {
+            background-color: #6A9CFF;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        .footer {
+            text-align: center;
+            color: #6C757D;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+        .subject-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .subject-item:last-child {
+            border-bottom: none;
+        }
+        .subject-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+        .subject-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #495057;
+            padding-left: 10px;
+        }
+        .subject-content a {
+            color: #0066cc;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .subject-content a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .logo { font-size: 2rem; }
+            .content-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Reborn黑皮书</div>
+            <div class="subtitle">今日作业</div>
+            <div class="date">2026年02月01日 星期日</div>
+        </div>
+        
+        
+        <div class="password-section" id="passwordSection">
+            <div style="font-weight: 600; margin-bottom: 10px;">请输入老师提供的口令</div>
+            <input type="password" class="password-input" id="passwordInput" placeholder="输入口令">
+            <br>
+            <button class="password-button" id="passwordSubmit">查看作业</button>
+            <div class="error-message" id="errorMessage">口令错误，请重新输入</div>
+        </div>
+        
+        
+        <div class="content-box" id="contentBox" style="display: none;">
+            <div class="title">📚 今日作业内容</div>
+            <div id="homeworkDisplay">
+                <!-- 作业内容将动态显示 -->
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>Reborn黑皮书 · 语言学习平台</div>
+            <div style="margin-top: 5px;">天天进步，每日新生</div>
+        </div>
+    </div>
+    
+    <script>
+        const homeworkData = {"vocab":"https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522packing%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522online%2520shopping%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522video%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522television%2520program%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522post%2520office%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522settle%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522scientist%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522agriculture%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522material%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522historical%2520map%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522king%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522preservation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522data%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522electrical%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522complex%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522steel%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522electricity%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522package%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522headphones%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522radio%2520signal%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522items%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522media%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522digital%2520store%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522rubber%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522measurement%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522twice%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522phone%2520statistics%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522space%2520station%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522bottom%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522small%2520scale%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D","reading":"https://breakingnewsenglish.com/","listening":"https://www.bilibili.com/video/BV1EpmTBqEMg?spm_id_from=333.788.videopod.sections&vd_source=197e51b747a21de6b2cb891f05d5bcfe","speaking":"https://liuyanglouise.github.io/speaking-gendu-002/#student-practice?id=practice_1769907783937_r7hhhps","writing":"https://www.britannica.com/procon","other":"https://liuyanglouise.github.io/speaking-gendu-002/#student-practice?id=practice_1769908191319_b69cx3m","password":"99999999"};
+        const hasPassword = true;
+        
+        // 初始化显示
+        function initDisplay() {
+            if (!hasPassword) {
+                displayHomework();
+            }
+        }
+        
+        // 显示作业内容
+        function displayHomework() {
+            const container = document.getElementById('homeworkDisplay');
+            let html = '';
+            
+            const subjects = [
+                { id: 'vocab', name: '词汇', emoji: '📚' },
+                { id: 'reading', name: '阅读', emoji: '📖' },
+                { id: 'listening', name: '听力', emoji: '🎧' },
+                { id: 'speaking', name: '口语', emoji: '🗣️' },
+                { id: 'writing', name: '写作', emoji: '✍️' },
+                { id: 'other', name: '其他', emoji: '💌' }
+            ];
+            
+            let hasContent = false;
+            
+            subjects.forEach(subject => {
+                const content = homeworkData[subject.id];
+                if (content && content.trim() !== '') {
+                    hasContent = true;
+                    
+                    // 检查是否是URL
+                    const isUrl = content.startsWith('http://') || content.startsWith('https://');
+                    const displayContent = isUrl 
+                        ? `<a href="${content}" target="_blank">${content}</a>`
+                        : content;
+                    
+                    html += `
+                        <div class="subject-item">
+                            <div class="subject-title">
+                                <span>${subject.emoji}</span>
+                                <span>${subject.name}作业</span>
+                            </div>
+                            <div class="subject-content">${displayContent}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (!hasContent) {
+                html = '<div style="text-align: center; color: #6C757D; padding: 20px;">今日暂无作业，请等待老师布置。</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // 密码验证功能
+        if (hasPassword) {
+            document.getElementById('passwordSubmit').addEventListener('click', function() {
+                const input = document.getElementById('passwordInput').value;
+                const errorMessage = document.getElementById('errorMessage');
+                
+                if (input === homeworkData.password) {
+                    document.getElementById('passwordSection').style.display = 'none';
+                    document.getElementById('contentBox').style.display = 'block';
+                    displayHomework();
+                } else {
+                    errorMessage.style.display = 'block';
+                    document.getElementById('passwordInput').value = '';
+                }
+            });
+            
+            // 支持回车键提交
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('passwordSubmit').click();
+                }
+            });
+        }
+        
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', initDisplay);
+    </script>
+</body>
+</html>
