@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reborn黑皮书 - 今日作业</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans SC', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #6C757D;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .date {
+            color: #495057;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .content-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .password-section {
+            background: #e8f4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: block;
+        }
+        .password-input {
+            width: 200px;
+            padding: 12px;
+            border: 2px solid #84AFFF;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .password-button {
+            background-color: #84AFFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .password-button:hover {
+            background-color: #6A9CFF;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        .footer {
+            text-align: center;
+            color: #6C757D;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+        .subject-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .subject-item:last-child {
+            border-bottom: none;
+        }
+        .subject-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+        .subject-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #495057;
+            padding-left: 10px;
+        }
+        .subject-content a {
+            color: #0066cc;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .subject-content a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .logo { font-size: 2rem; }
+            .content-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Reborn黑皮书</div>
+            <div class="subtitle">今日作业</div>
+            <div class="date">2026年02月04日 星期三</div>
+        </div>
+        
+        
+        <div class="password-section" id="passwordSection">
+            <div style="font-weight: 600; margin-bottom: 10px;">请输入老师提供的口令</div>
+            <input type="password" class="password-input" id="passwordInput" placeholder="输入口令">
+            <br>
+            <button class="password-button" id="passwordSubmit">查看作业</button>
+            <div class="error-message" id="errorMessage">口令错误，请重新输入</div>
+        </div>
+        
+        
+        <div class="content-box" id="contentBox" style="display: none;">
+            <div class="title">📚 今日作业内容</div>
+            <div id="homeworkDisplay">
+                <!-- 作业内容将动态显示 -->
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>Reborn黑皮书 · 语言学习平台</div>
+            <div style="margin-top: 5px;">天天进步，每日新生</div>
+        </div>
+    </div>
+    
+    <script>
+        const homeworkData = {"vocab":"https://liuyanglouise.github.io/cihui-hanyi-xuanyingwen/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522restrict%2520v.%2522%252C%2522meaning%2522%253A%2522%25E9%2599%2590%25E5%2588%25B6%2522%257D%252C%257B%2522english%2522%253A%2522participant%2520n.%2522%252C%2522meaning%2522%253A%2522%25E5%258F%2582%25E4%25B8%258E%25E8%2580%2585%2522%257D%252C%257B%2522english%2522%253A%2522corresponding%2520adj.%2522%252C%2522meaning%2522%253A%2522%25E7%259B%25B8%25E5%25BA%2594%25E7%259A%2584%2522%257D%252C%257B%2522english%2522%253A%2522accessible%2520adj.%2522%252C%2522meaning%2522%253A%2522%25E5%258F%25AF%25E8%25BF%259B%25E5%2585%25A5%25E7%259A%2584%2522%257D%252C%257B%2522english%2522%253A%2522essential%2520adj.%2522%252C%2522meaning%2522%253A%2522%25E5%25BF%2585%25E8%25A6%2581%25E7%259A%2584%2522%257D%252C%257B%2522english%2522%253A%2522ultimate%2520adj.%2522%252C%2522meaning%2522%253A%2522%25E6%259C%2580%25E7%25BB%2588%25E7%259A%2584%2522%257D%252C%257B%2522english%2522%253A%2522presumably%2520adv.%2522%252C%2522meaning%2522%253A%2522%25E6%258E%25A8%25E6%25B5%258B%25E5%259C%25B0%2522%257D%252C%257B%2522english%2522%253A%2522heritage%2520n.%2522%252C%2522meaning%2522%253A%2522%25E9%2581%2597%25E4%25BA%25A7%2522%257D%252C%257B%2522english%2522%253A%2522cognitive%2520adj.%2522%252C%2522meaning%2522%253A%2522%25E8%25AE%25A4%25E7%259F%25A5%25E7%259A%2584%2522%257D%252C%257B%2522english%2522%253A%2522exclusive%2520adj.%2522%252C%2522meaning%2522%253A%2522%25E6%258E%2592%25E4%25BB%2596%25E7%259A%2584%25EF%25BC%259B%25E7%258B%25AC%25E6%259C%2589%25E7%259A%2584%2522%257D%252C%257B%2522english%2522%253A%2522approximately%2520adv.%2522%252C%2522meaning%2522%253A%2522%25E5%25A4%25A7%25E7%25BA%25A6%2522%257D%252C%257B%2522english%2522%253A%2522gesture%2520n.%252Fv.%2522%252C%2522meaning%2522%253A%2522%25E6%2589%258B%25E5%258A%25BF%25EF%25BC%259B%25E5%2581%259A%25E6%2589%258B%25E5%258A%25BF%2522%257D%252C%257B%2522english%2522%253A%2522bias%2520n.%252Fv.%2522%252C%2522meaning%2522%253A%2522%25E5%2581%258F%25E8%25A7%2581%2522%257D%252C%257B%2522english%2522%253A%2522proportion%2520n.%2522%252C%2522meaning%2522%253A%2522%25E6%25AF%2594%25E4%25BE%258B%2522%257D%252C%257B%2522english%2522%253A%2522enable%2520v.%2522%252C%2522meaning%2522%253A%2522%25E4%25BD%25BF%25E8%2583%25BD%25E5%25A4%259F%2522%257D%252C%257B%2522english%2522%253A%2522infinite%2520adj.%2522%252C%2522meaning%2522%253A%2522%25E6%2597%25A0%25E7%25A9%25B7%25E7%259A%2584%2522%257D%252C%257B%2522english%2522%253A%2522ignorance%2520n.%2522%252C%2522meaning%2522%253A%2522%25E6%2597%25A0%25E7%259F%25A5%2522%257D%252C%257B%2522english%2522%253A%2522accelerate%2520v.%2522%252C%2522meaning%2522%253A%2522%25E5%258A%25A0%25E9%2580%259F%2522%257D%252C%257B%2522english%2522%253A%2522feasible%2520adj.%2522%252C%2522meaning%2522%253A%2522%25E5%258F%25AF%25E8%25A1%258C%25E7%259A%2584%2522%257D%252C%257B%2522english%2522%253A%2522cultivate%2520v.%2522%252C%2522meaning%2522%253A%2522%25E5%259F%25B9%25E5%2585%25BB%2522%257D%255D","reading":"","listening":"https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522donation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522safari%2520park%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522protection%2520policy%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522insect%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522wood%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522grass%2520ground%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522vary%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522cattle%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522migrant%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522gene%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522grasses%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522variety%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522germ%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522disappear%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522spider%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522feeding%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522resistant%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522route%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522tissue%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522reaction%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522conservation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522grass%2520leaves%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522protection%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522fighting%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522forestry%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522migration%2520pattern%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522voluntary%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522feeding%2520time%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522reflective%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522forest%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D","speaking":"https://liuyanglouise.github.io/speaking-laoshi-45s-001/?student=true&voiceType=female&sentences=%255B%257B%2522english%2522%253A%2522How%2520can%2520parents%2520teach%2520their%2520children%2520to%2520protect%2520nature%253F%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522Should%2520schools%2520teach%2520children%2520to%2520get%2520close%2520to%2520nature%253F%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522Do%2520you%2520think%2520there%2520should%2520be%2520laws%2520to%2520protect%2520nature%253F%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522What%2520kind%2520of%2520job%2520can%2520be%2520called%2520a%2520%27dream%2520job%27%253F%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522What%2520jobs%2520do%2520children%2520want%2520to%2520do%2520when%2520they%2520grow%2520up%253F%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522Do%2520people%27s%2520ideal%2520jobs%2520change%2520as%2520they%2520grow%2520up%253F%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522What%2520should%2520people%2520consider%2520when%2520choosing%2520jobs%253F%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D","writing":"","other":"https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522antibiotics%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522solution%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522influence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522diseases%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522dentist%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522medicine%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522lungs%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522virus%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522mental%2520ability%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522painkiller%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522against%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522body%2520language%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522nursing%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522natural%2520medicine%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522pressure%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522rest%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522fear%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522useless%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522life%2520science%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522emotion%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522jaw%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522body%2520fluid%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522aging%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522mental%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522back%2520problem%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522sleeping%2520pills%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522lifespan%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522body%2520shape%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522detail%2520information%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522physical%2520changes%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D","password":"2222"};
+        const hasPassword = true;
+        
+        // 初始化显示
+        function initDisplay() {
+            if (!hasPassword) {
+                displayHomework();
+            }
+        }
+        
+        // 显示作业内容
+        function displayHomework() {
+            const container = document.getElementById('homeworkDisplay');
+            let html = '';
+            
+            const subjects = [
+                { id: 'vocab', name: '词汇', emoji: '📚' },
+                { id: 'reading', name: '阅读', emoji: '📖' },
+                { id: 'listening', name: '听力', emoji: '🎧' },
+                { id: 'speaking', name: '口语', emoji: '🗣️' },
+                { id: 'writing', name: '写作', emoji: '✍️' },
+                { id: 'other', name: '其他', emoji: '💌' }
+            ];
+            
+            let hasContent = false;
+            
+            subjects.forEach(subject => {
+                const content = homeworkData[subject.id];
+                if (content && content.trim() !== '') {
+                    hasContent = true;
+                    
+                    // 检查是否是URL
+                    const isUrl = content.startsWith('http://') || content.startsWith('https://');
+                    const displayContent = isUrl 
+                        ? `<a href="${content}" target="_blank">${content}</a>`
+                        : content;
+                    
+                    html += `
+                        <div class="subject-item">
+                            <div class="subject-title">
+                                <span>${subject.emoji}</span>
+                                <span>${subject.name}作业</span>
+                            </div>
+                            <div class="subject-content">${displayContent}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (!hasContent) {
+                html = '<div style="text-align: center; color: #6C757D; padding: 20px;">今日暂无作业，请等待老师布置。</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // 密码验证功能
+        if (hasPassword) {
+            document.getElementById('passwordSubmit').addEventListener('click', function() {
+                const input = document.getElementById('passwordInput').value;
+                const errorMessage = document.getElementById('errorMessage');
+                
+                if (input === homeworkData.password) {
+                    document.getElementById('passwordSection').style.display = 'none';
+                    document.getElementById('contentBox').style.display = 'block';
+                    displayHomework();
+                } else {
+                    errorMessage.style.display = 'block';
+                    document.getElementById('passwordInput').value = '';
+                }
+            });
+            
+            // 支持回车键提交
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('passwordSubmit').click();
+                }
+            });
+        }
+        
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', initDisplay);
+    </script>
+</body>
+</html>
