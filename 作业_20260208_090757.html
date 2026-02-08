@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reborn黑皮书 - 今日作业</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans SC', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #6C757D;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .date {
+            color: #495057;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .content-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .password-section {
+            background: #e8f4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: block;
+        }
+        .password-input {
+            width: 200px;
+            padding: 12px;
+            border: 2px solid #84AFFF;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .password-button {
+            background-color: #84AFFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .password-button:hover {
+            background-color: #6A9CFF;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        .footer {
+            text-align: center;
+            color: #6C757D;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+        .subject-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .subject-item:last-child {
+            border-bottom: none;
+        }
+        .subject-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+        .subject-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #495057;
+            padding-left: 10px;
+        }
+        .subject-content a {
+            color: #0066cc;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .subject-content a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .logo { font-size: 2rem; }
+            .content-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Reborn黑皮书</div>
+            <div class="subtitle">今日作业</div>
+            <div class="date">2026年02月08日 星期日</div>
+        </div>
+        
+        
+        <div class="password-section" id="passwordSection">
+            <div style="font-weight: 600; margin-bottom: 10px;">请输入老师提供的口令</div>
+            <input type="password" class="password-input" id="passwordInput" placeholder="输入口令">
+            <br>
+            <button class="password-button" id="passwordSubmit">查看作业</button>
+            <div class="error-message" id="errorMessage">口令错误，请重新输入</div>
+        </div>
+        
+        
+        <div class="content-box" id="contentBox" style="display: none;">
+            <div class="title">📚 今日作业内容</div>
+            
+                    <div class="subject-item" style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding-left: 15px;">
+                        <div class="subject-title">
+                            <span>💬</span>
+                            <span>老师留言</span>
+                        </div>
+                        <div class="subject-content" style="color: #856404;">这是今天的词汇，含听力核心词汇拼写与高阶词汇拼写</div>
+                    </div>
+                
+            <div id="homeworkDisplay">
+                
+                            <div class="subject-item">
+                                <div class="subject-title">
+                                    <span>📚</span>
+                                    <span>听力核心词汇</span>
+                                </div>
+                                <div class="subject-content"><a href="https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522ambulance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522facility%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522available%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522schedule%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522departure%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522reservation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522membership%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522ingredient%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522nutrition%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522utensil%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522maintenance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522landlord%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522tenant%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522insurance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522reception%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522analysis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522data%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522experiment%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522theory%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evidence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522journal%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522assessment%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522dissertation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522thesis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522parameter%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522statistics%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522perspective%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522framework%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522context%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522criteria%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D" target="_blank">https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522ambulance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522facility%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522available%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522schedule%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522departure%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522reservation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522membership%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522ingredient%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522nutrition%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522utensil%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522maintenance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522landlord%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522tenant%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522insurance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522reception%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522analysis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522data%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522experiment%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522theory%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evidence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522journal%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522assessment%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522dissertation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522thesis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522parameter%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522statistics%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522perspective%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522framework%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522context%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522criteria%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D</a></div>
+                            </div>
+                        
+                            <div class="subject-item">
+                                <div class="subject-title">
+                                    <span>📚</span>
+                                    <span>高阶词汇拼写</span>
+                                </div>
+                                <div class="subject-content"><a href="https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522concept%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522phenomenon%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522perspective%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522approach%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522interpretation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522significance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522characteristic%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522function%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522consequence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522contradiction%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522process%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522factor%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522indicator%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522correlation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522interaction%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522impact%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522adaptation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evolution%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522transformation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522dimension%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522argument%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522assumption%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522criticism%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evidence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522hypothesis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522implication%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522controversy%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evaluation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522justification%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522mechanism%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D" target="_blank">https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522concept%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522phenomenon%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522perspective%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522approach%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522interpretation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522significance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522characteristic%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522function%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522consequence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522contradiction%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522process%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522factor%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522indicator%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522correlation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522interaction%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522impact%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522adaptation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evolution%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522transformation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522dimension%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522argument%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522assumption%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522criticism%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evidence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522hypothesis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522implication%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522controversy%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evaluation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522justification%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522mechanism%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D</a></div>
+                            </div>
+                        
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>Reborn黑皮书 · 语言学习平台</div>
+            <div style="margin-top: 5px;">天天进步，每日新生</div>
+        </div>
+    </div>
+    
+    <script>
+        const homeworkData = {"password":"12341234","teacherMessage":"这是今天的词汇，含听力核心词汇拼写与高阶词汇拼写","items":[{"subjectName":"听力核心词汇","content":"https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522ambulance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522facility%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522available%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522schedule%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522departure%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522reservation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522membership%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522ingredient%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522nutrition%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522utensil%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522maintenance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522landlord%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522tenant%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522insurance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522reception%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522analysis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522data%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522experiment%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522theory%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evidence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522journal%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522assessment%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522dissertation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522thesis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522parameter%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522statistics%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522perspective%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522framework%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522context%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522criteria%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D"},{"subjectName":"高阶词汇拼写","content":"https://liuyanglouise.github.io/tingxie-laoshi/?student=true&password=1111&words=%255B%257B%2522english%2522%253A%2522concept%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522phenomenon%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522perspective%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522approach%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522interpretation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522significance%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522characteristic%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522function%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522consequence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522contradiction%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522process%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522factor%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522indicator%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522correlation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522interaction%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522impact%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522adaptation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evolution%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522transformation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522dimension%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522argument%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522assumption%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522criticism%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evidence%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522hypothesis%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522implication%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522controversy%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522evaluation%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522justification%2522%252C%2522meaning%2522%253A%2522%2522%257D%252C%257B%2522english%2522%253A%2522mechanism%2522%252C%2522meaning%2522%253A%2522%2522%257D%255D"},{"subjectName":"前面完成后，继续完成顾家北P1+4指定填空题","content":""}]};
+        const hasPassword = true;
+        
+        // 密码验证功能
+        if (hasPassword) {
+            document.getElementById('passwordSubmit').addEventListener('click', function() {
+                const input = document.getElementById('passwordInput').value;
+                const errorMessage = document.getElementById('errorMessage');
+                
+                if (input === homeworkData.password) {
+                    document.getElementById('passwordSection').style.display = 'none';
+                    document.getElementById('contentBox').style.display = 'block';
+                } else {
+                    errorMessage.style.display = 'block';
+                    document.getElementById('passwordInput').value = '';
+                }
+            });
+            
+            // 支持回车键提交
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('passwordSubmit').click();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
